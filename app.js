@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 require('./config/passport')(passport); // pass passport for configuration
 var corsOptions = {
-    origin: 'http://localhost:4200',
+    origin: 'https://157.230.208.35:4200',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
