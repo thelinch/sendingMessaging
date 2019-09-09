@@ -64,7 +64,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 //IPFILTER
-//app.use(securityip.verify)
+app.use(securityip.verify)
 /*
 providerService.listHosts().then(function(providers){
     let ips=providers;
