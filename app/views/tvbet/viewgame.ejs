@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container" style="max-width:100%; width:100%">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe
+          src="<%=server%>?lng=<%=language%>&tokenAuth=<%=token%>&clientId=<%=clientId%>"
+          frameborder="0"
+          scrolling="no"
+          allowfullscreen
+          allow="autoplay"
+        ></iframe>
+      </div>
+    </div>
+  </body>
+  <script>
+    var gameObj = {
+      iframe: $("#tvbet-iframe"),
+      changeHeigthGameField: function(height) {
+        height = parseInt(height);
+        if (height != "NaN" && height > 0) {
+          this.iframe.height(height);
+        }
+      },
+      scrollTo: function(y, scrollDuration) {
+        scrollDuration = scrollDuration || 300;
+        var scrollStep = -(window.scrollY - y) / (scrollDuration / 15);
+        scrollInterval = setInterval(function() {
+          if (Math.abs(window.scrollY - y) > Math.abs(scrollStep)) {
+            window.scrollBy(0, scrollStep);
+          } else {
+            window.scrollTo(0, y);
+            clearInterval(scrollInterval);
+          }
+        }, 15);
+      },
+      listenMessage: function(event) {
+        var origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
+        if (gameObj.isJSON(event.data)) {
+          var data = JSON.parse(event.data);
+          if (
+            typeof data.tvbet_height !== "undefined" &&
+            origin.indexOf("<tvbet_server>") !== -1
+          ) {
+            gameObj.changeHeigthGameField(data.tvbet_height);
+          } else if (
+            typeof data.tvbet_scrollto !== "undefined" &&
+            origin.indexOf("<tvbet_server>") !== -1
+          ) {
+            gameObj.scrollTo(data.tvbet_scrollto);
+          }
+        }
+      },
+      sendMessage: function(data) {
+        document
+          .getElementById("tvbet-iframe")
+          .contentWindow.postMessage(JSON.stringify(data), "*");
+      },
+      getVh: function() {
+        let vh = Math.max(
+          document.documentElement.clientHeight,
+          window.innerHeight || 0
+        );
+        vh =
+          vh - document.getElementById("fTop").getBoundingClientRect().height;
+        return vh;
+      },
+      isJSON: function(str) {
+        try {
+          return JSON.parse(str) && !!str;
+        } catch (e) {
+          return false;
+        }
+      }
+    };
+    gameObj.iframe.load(function() {
+      let vh = gameObj.getVh();
+      gameObj.sendMessage({ tvbet_vh: vh });
+    });
+    $(window)
+      .scroll(function() {
+        let scroll =
+          0 -
+          document.getElementById("tvbet-iframe").getBoundingClientRect().y +
+          document.getElementById("fTop").getBoundingClientRect().height;
+        gameObj.sendMessage({ tvbet_scroll_position: scroll });
+      })
+      .resize(function() {
+        let vh = gameObj.getVh();
+        gameObj.sendMessage({ tvbet_vh: vh });
+      });
+    if (window.addEventListener) {
+      window.addEventListener("message", gameObj.listenMessage, false);
+    } else {
+      window.attachEvent("onmessage", gameObj.listenMessage);
+    }
+  </script>
+</html>

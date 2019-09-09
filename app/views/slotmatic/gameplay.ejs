@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<game>
+    <% if( gameresult.status =='OK' ) {%>
+        <% Object.keys(gameresult).forEach( function(key){ %>
+            <%if( key!="status" && key!="hmac" && key!="userid" && key!="gameevent" ){ %>
+                <<%=key%>><%=gameresult[key]%></<%=key%>>
+             <% } %>
+        <% }) %>
+    <%} else {%>
+        <error><%=gameresult.status%></error>
+    <%}%>
+</game>

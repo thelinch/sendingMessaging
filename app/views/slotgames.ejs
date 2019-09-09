@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Juegos SlotMatic</title>
+    <script type="text/javascript" src="/js/slotmatic/gamewindow.js"></script>
+</head>
+<body>
+    <h1>Games (<%=l.length%>)</h1>
+    <!-- <a href="javascript:opengame( 'hot7', 'Hot Seven (Practice Mode)', 'demo', '1067', '600', 'slotmatic/gameview_amatic_mobile', 'en' );">Play For Fun</a> -->
+    <ul>
+        <% for(var i = 0; i < l.length; i++) { %>
+            <li> <a href="javascript:opengame( '<%=l[i].id%>', '<%=l[i].name%>', 'real', '1067', '600', '<%= (l[i].url) %>', 'en' );"> <%=l[i].brand%> <%=l[i].name%></a></li>	
+        <% } %>
+        </ul>
+</body>
+</html>
