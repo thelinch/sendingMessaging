@@ -24,7 +24,7 @@ exports.sendMessaging = async function (req, res) {
 		notification: {
 			title: title,
 			body: messageBody,
-			click_action: "localhost:4200/persona/" + user.id + "/area/" + user.area.id + "/map?lt=" + data.lt + "&ln=" + data.ln,
+			click_action: "https://www.appecc.tk/persona/" + user.id + "/area/" + user.area.id + "/map?lt=" + data.lt + "&ln=" + data.ln,
 		},
 	};
 	const respuesta = await fcm.send(message)
