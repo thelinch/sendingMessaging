@@ -28,7 +28,7 @@ exports.sendMessaging = async function (req, res) {
 		},
 	};
 	const respuesta = await fcm.send(message)
-	res.json(respuesta)
+	res.send(respuesta)
 }
 exports.registerAndUpdateTokenUser = function (req, res) {
 	const { user } = req.body
