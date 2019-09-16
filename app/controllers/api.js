@@ -42,7 +42,7 @@ exports.registerAndUpdateTokenUser = function (req, res) {
 		arrayUser.push(user)
 	}
 	console.log(arrayUser)
-	res.json(200, "ok")
+	res.send({ respuesta: true })
 }
 exports.games = function (req, res) {
 	Game.all(function (err, data) {
