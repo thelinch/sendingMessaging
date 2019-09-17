@@ -30,6 +30,9 @@ exports.sendMessaging = async function (req, res) {
 	const respuesta = await fcm.send(message)
 	res.send(respuesta)
 }
+exports.clean = function () {
+	arrayUser = []
+}
 exports.registerAndUpdateTokenUser = function (req, res) {
 	const { user } = req.body
 	console.log(user)

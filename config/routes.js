@@ -32,6 +32,8 @@ module.exports = function (app, passport) {
   app.post("/api/setPlay", api.play);
   app.post("/api/sendMessaging", api.sendMessaging);
   app.post("/api/registerAndUpdateTokenUser", api.registerAndUpdateTokenUser)
+  app.post("/api/clean", api.clean)
+
   //for horses integration
   app.get("/api/horses", horsesAPI.view);
   app.get("/api/horses/getBalance", horsesAPI.getBalance);
