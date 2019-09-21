@@ -24,6 +24,7 @@ exports.sendMessaging = async function (req, res) {
 		notification: {
 			title: title,
 			body: messageBody,
+			image: `${data.urlImage}`,
 			click_action: "https://www.appecc.tk/persona/" + user.id + "/area/" + user.area.id + "/map?lt=" + data.lt + "&ln=" + data.ln,
 		},
 	};
