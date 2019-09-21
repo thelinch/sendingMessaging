@@ -18,7 +18,7 @@ exports.sendMessaging = async function (req, res) {
 	var { messageBody, title, data, user } = req.body
 
 	var message = {
-		registration_ids: arrayUser.map(user => user.token),
+		registration_ids: arrayUser.filter(userParam => userParam.id != user.id).map(user => user.token),
 		collapse_key: 'your_collapse_key',
 		data: data,
 		notification: {
