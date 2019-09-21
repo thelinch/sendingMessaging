@@ -25,6 +25,7 @@ exports.sendMessaging = async function (req, res) {
 			title: title,
 			body: messageBody,
 			image: `${data.urlImage}`,
+			icon: "https://firebasestorage.googleapis.com/v0/b/angular-1ca2a.appspot.com/o/assets%2F70450615_1364313817055140_206146546033491968_n.png?alt=media&token=a55910f4-8e90-44fb-9dd6-290efd29ba34"
 			click_action: "https://www.appecc.tk/persona/" + user.id + "/area/" + user.area.id + "/map?lt=" + data.lt + "&ln=" + data.ln,
 		},
 	};
