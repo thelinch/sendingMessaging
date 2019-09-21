@@ -40,11 +40,12 @@ exports.registerAndUpdateTokenUser = function (req, res) {
 		const indexUser = arrayUser.findIndex(userLoged => userLoged.id == user.id)
 		if (indexUser != -1) {
 			arrayUser[indexUser].token = user.token
+		} else {
+			arrayUser.push(user)
 		}
 	} else {
 		arrayUser.push(user)
 	}
-	console.log(arrayUser)
 	res.send({ respuesta: true })
 }
 exports.games = function (req, res) {
