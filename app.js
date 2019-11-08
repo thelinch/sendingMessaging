@@ -7,7 +7,7 @@ var timeout = require('connect-timeout');
 var cors = require('cors')
 
 
-const securityip = require("./app/middlewares/securityip")
+//const securityip = require("./app/middlewares/securityip")
 
 
 var port = process.env.PORT || 8042;
