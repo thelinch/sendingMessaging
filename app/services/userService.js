@@ -2,12 +2,10 @@ const axios = require("axios");
 const userRepository = require("../models/user");
 var crypto = require("crypto");
 const moment = require("moment");
-const bcrypt = require("bcrypt");
-
 var userService = {
-  all: function() {},
+  all: function () { },
   save: (user, callback) => {
-    userRepository.save(user, function(e, r) {
+    userRepository.save(user, function (e, r) {
       callback(r);
     });
   },
@@ -93,7 +91,7 @@ var userService = {
         else {
           userRepository.updateBalance(
             { balance: params.balance, userid: u.id },
-            function(r) {
+            function (r) {
               let session = {
                 hashcode: hash,
                 userid: u.id,
